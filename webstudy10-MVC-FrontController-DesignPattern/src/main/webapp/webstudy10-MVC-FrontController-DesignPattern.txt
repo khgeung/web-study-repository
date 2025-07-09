@@ -435,6 +435,84 @@ JSP 페이지에서 JSTL 사용 선언부
 
 중요 포인트: 톰캣 10.1은 Jakarta EE 10을 기반으로 하므로 jakarta.tags.core 네임스페이스를 사용해야 함      
       
+      
+**webstudy10-MVC-FrontController-DesignPattern**
+
+- Front Controller Design Pattern
+ : 모든 클라이언트의 요청을 하나의 진입점으로 통합하여 처리하는 설계 패턴
+ 
+ 실생활의 예
+ 호텔 프론트
+ - 모든 고객 요청이 프론트 데스크로 집중
+ - 프론트 데스크에서 요청에 대한 적절한 부서 또는 담당자로 연결
+ - 체크인, 홈서비스 등 청소 등 각각 전담 부서 처리
+ 
+ Front Controller 가 없다면 ? 
+ 문제 상황 : 각 기능마다 별도 입구를 찾아야 함
+ - 회원 가입 -> RegisterMemberServlet
+ - 로그인 -> LoginServlet
+ - 로그아웃 -> LogoutServlet
+ - 상품조회 -> FindProductByIdServlet
+ - 주문처리 -> OrderProcessingServlet
+ 등 등
+ 
+ 결과 : 프론트가 없다면 
+  공통 처리 로직 중복 (보안, 로깅, 인코딩 등)
+  일관성 없는 처리 방식
+  관리 포인트 급증
+  생산성 저하 및 유지보수의 어려움
+  
+  Front Controller Design Pattern 도입 후
+  위 문제의 해결책 : 모든 요청을 하나의 입구로 처리
+  
+  장점 : 공통 로직의 중앙화(보안, 로깅, 예외처리 등)
+  		일관된 요청 처리 흐름
+  		관리 포인트 단일화
+  		확장성과 유지보수성 향상
+  		
+  Spring과 연관성 : Spring MVC의 DispatcherServlet 이 Front Controller Pattern이 적용된 Front Controller 역할을 함
+ 
+ 
+  FrontController Ver1 : 기본 Front Controller -> 모든 클라이언트의 요청을 하나의 진입점으로 모았음
+  // 모든 로직이 doDispatch에 집중
+  doDispatch(request, response){
+  	if(requestType.equals("find"){
+  	// 직접 요청 처리 (비즈니스 처리)
+  	}else if(requestType.equals("register"){
+  	// 직접 요청 처리 (비즈니스 처리)
+  	}
+  }
+  문제점 : 코드 비대화, 확장성 부족 (만약 새로운 업무 추가시 공통 코드를 계속 변경)
+ 
+   FrontController Ver2 : 메소드 분리, 단일 책임 원칙 적용
+   
+   doDispatch(request, response){
+   	  if(){
+   	  		findCustomerById(request, response);
+   	  }else if(){
+   	  		registerCustomer(request, response);
+   	  }
+   }
+   findCustomerById(request, response){
+   
+   }
+   registerCustomer(request, response){
+   
+   }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      
+      
+      
+      
+      
 
 
 
