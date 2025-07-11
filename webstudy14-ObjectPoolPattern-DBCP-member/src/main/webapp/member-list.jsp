@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%-- jstl 선언부 --%>
-<%@taglib prefix="c" uri="jakarta.tags.core" %>
+	pageEncoding="UTF-8" %>
+	<%-- jstl 선언부 --%>
+	<%@taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>step4-jstl-forEach</title>
+<title>Insert title here</title>
 <style>
 table {
-	width: 100%;
+	width: 70%;
 	border-collapse: collapse; /* 테두리 겹치게 설정 */
 }
 
@@ -25,16 +25,7 @@ th, td {
 </style>
 </head>
 <body>
-	<%--
-			jstl forEach : java or jsp 의 for 문에 해당함 
-			items : 배열 또는 컬렉션 
-			var : 요소를 담을 임시변수 
- --%>
-	<h3>step4 jstl forEach</h3>
-	<c:forEach items="${foods}" var="food">
-	${food}<br>
-	</c:forEach>
-	<hr>
+	<h4>${param.address}에 사는 회원</h4>
 	<table>
 		<thead>
 			<tr>
@@ -42,13 +33,15 @@ th, td {
 				<th>이름</th>
 			</tr>
 		</thead>
+		
 		<tbody>
 		
+		<c:forEach items="${memberList}" var="member">
 			<tr>
-				<td></td>
-				<td></td>
+				<td>${member.id} </td>
+				<td>${member.name}</td>
 			</tr>
-			
+			</c:forEach>
 		</tbody>
 	</table>
 </body>
